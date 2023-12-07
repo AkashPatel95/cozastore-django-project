@@ -1,0 +1,181 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body class="animsition">
+	
+	<!-- Header -->
+	<header>
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+    <!-- Topbar -->
+    <div class="top-bar">
+        <div class="content-topbar flex-sb-m h-full container">
+            <div class="left-top-bar">
+                Free shipping for standard order over $100
+            </div>
+
+            <div class="right-top-bar flex-w h-full">
+                <div style="flex: 1;"></div> <!-- Empty div to push the following elements to the right -->
+
+                <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    Help & FAQs
+                </a>
+                {% if request.session.email %}
+                	<a href="{% url 'change-password' %}" class="flex-c-m trans-04 p-lr-25">
+                    Change Password
+                </a>
+                
+
+                <a href="{% url 'logout' %}" class="flex-c-m trans-04 p-lr-25">
+                    Logout
+                </a>
+                {% else %}
+                	<a href="{% url 'signup' %}" class="flex-c-m trans-04 p-lr-25">
+                    SignUp
+                </a>
+                
+
+                <a href="{% url 'login' %}" class="flex-c-m trans-04 p-lr-25">
+                    Login
+                </a>
+                {% endif %}
+
+                <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    USD
+                </a>
+            </div>
+        	</div>
+    	</div>
+	</div>
+
+
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop container">
+					
+					<!-- Logo desktop -->		
+					<a href="#" class="logo">
+						<img src="{% static 'images/icons/logo-01.png' %}" alt="IMG-LOGO">
+					</a>
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li class="{% if request.path == '/' %} active {% endif %}">
+								<a href="{% url 'index' %}">Home</a>
+								
+							</li>
+							{% if request.session.email %}
+								<li class="{% if request.path == '/product/' %} active {% endif %}">
+								<a href="{% url 'product' %}">Shop</a>
+								</li>
+								<li class="{% if request.path == '/wishlist/' %} active {% endif %}">
+								<a href="{% url 'wishlist' %}">Wishlist [{{request.session.wishlist_count}}]</a>
+								</li>
+
+								<li class="{% if request.path == '/shoping-cart/' %} active {% endif %}">
+									<a href="{% url 'shoping-cart' %}">Cart [{{request.session.cart_count}}]</a>
+								</li>
+								<li class="{% if request.path == '/myorder/' %} active {% endif %}">
+									<a href="{% url 'myorder' %}">My Order</a>
+								</li>
+							{% else %}
+								<li class="{% if request.path == '/product/' %} active {% endif %}">
+								<a href="#">Shop</a>
+								</li>
+								<li class="label1" data-label1="hot" class="{% if request.path == '/shopping-cart/' %} active {% endif %}">
+								<a href="#">Features</a>
+								</li>
+								<li class="{% if request.path == '/blog/' %} active {% endif %}">
+									<a href="{% url 'blog' %}">Blog</a>
+								</li>
+							{% endif %}
+							
+							<li>
+								<a href="{% url 'about' %}">About</a>
+							</li>
+
+							<li class="{% if request.path == '/contact/' %} active {% endif %}">
+								<a href="{% url 'contact' %}">Contact</a>
+							</li>
+						</ul>
+					</div>	
+					{% if request.session.email %}
+					<!-- Icon header -->
+						<div class="wrap-icon-header flex-w flex-r-m">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+								<i class="zmdi zmdi-search"></i>
+							</div>
+						<a href="{% url 'shoping-cart' %}">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{request.session.cart_count}}">
+								<i class="zmdi zmdi-shopping-cart"></i>
+							</div>
+						</a>
+						</div>
+					{% else %}
+						<div class="wrap-icon-header flex-w flex-r-m">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+								<i class="zmdi zmdi-search"></i>
+							</div>
+						</div>
+					{% endif %}
+				</nav>
+			</div>	
+		</div>
+
+
+
+
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="{% static 'images/icons/icon-close2.png' %}" alt="CLOSE">
+				</button>
+
+				<form class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</header>
